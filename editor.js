@@ -55,6 +55,11 @@ function initEditors() {
   editors.css  = CodeMirror.fromTextArea(document.getElementById('editor-css'),  { ...base, mode:'css' });
   editors.js   = CodeMirror.fromTextArea(document.getElementById('editor-js'),   { ...base, mode:'javascript' });
 
+  // Fix accessibility: label the hidden CodeMirror textarea inputs for screen readers
+  editors.html.getInputField().setAttribute('aria-label', 'HTML code editor');
+  editors.css.getInputField().setAttribute('aria-label',  'CSS code editor');
+  editors.js.getInputField().setAttribute('aria-label',   'JavaScript code editor');
+
   setFontSize(fontSize, true);
 
   Object.values(editors).forEach(ed => {
