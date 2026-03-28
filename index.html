@@ -34,6 +34,8 @@
   <!-- ═══ ADDITIONAL SIGNALS ════════════════════════════════════════════ -->
   <meta name="theme-color" content="#0d1117" />
   <meta name="application-name" content="HTMLCSSJSEditor" />
+  <meta name="referrer" content="no-referrer-when-downgrade" />
+  <meta name="rating" content="general" />
   <!-- Add your Google Search Console code below when ready -->
   <!-- <meta name="google-site-verification" content="PASTE_YOUR_CODE_HERE" /> -->
 
@@ -55,20 +57,49 @@
         "@id": "https://htmleditor.analyticsdrive.tech/#website",
         "url": "https://htmleditor.analyticsdrive.tech/",
         "name": "HTMLCSSJSEditor",
-        "description": "Free online HTML, CSS and JavaScript editor with live preview"
+        "description": "Free online HTML, CSS and JavaScript editor with live preview",
+        "inLanguage": "en-US",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://htmleditor.analyticsdrive.tech/#{search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      },
+      {
+        "@type": "Organization",
+        "@id": "https://htmleditor.analyticsdrive.tech/#organization",
+        "name": "HTMLCSSJSEditor",
+        "url": "https://htmleditor.analyticsdrive.tech/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://htmleditor.analyticsdrive.tech/og-image.png",
+          "width": 1200,
+          "height": 630
+        }
       },
       {
         "@type": "WebApplication",
         "@id": "https://htmleditor.analyticsdrive.tech/#app",
         "name": "HTMLCSSJSEditor",
+        "alternateName": ["HTML CSS JS Editor", "Online HTML Editor", "Free Code Editor"],
         "url": "https://htmleditor.analyticsdrive.tech/",
         "description": "Free online HTML, CSS and JavaScript code editor with instant live preview. No sign-up required.",
         "applicationCategory": "DeveloperApplication",
         "applicationSubCategory": "Code Editor",
         "operatingSystem": "Any",
         "browserRequirements": "Requires JavaScript. Works in Chrome, Firefox, Edge, Safari.",
-        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "USD" },
-        "screenshot": "https://htmleditor.analyticsdrive.tech/og-image.png",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "USD",
+          "availability": "https://schema.org/InStock"
+        },
+        "screenshot": {
+          "@type": "ImageObject",
+          "url": "https://htmleditor.analyticsdrive.tech/og-image.png",
+          "width": 1200,
+          "height": 630
+        },
         "featureList": [
           "Live HTML, CSS and JavaScript preview",
           "Syntax highlighting via CodeMirror",
@@ -82,7 +113,11 @@
           "No sign-up required"
         ],
         "isAccessibleForFree": true,
-        "inLanguage": "en"
+        "inLanguage": "en-US",
+        "datePublished": "2026-03-28",
+        "dateModified": "2026-03-28",
+        "publisher": { "@id": "https://htmleditor.analyticsdrive.tech/#organization" },
+        "mainEntityOfPage": { "@id": "https://htmleditor.analyticsdrive.tech/#website" }
       },
       {
         "@type": "FAQPage",
@@ -143,7 +178,8 @@
   }
   </script>
 
-  <!-- Fonts -->
+  <!-- Fonts: preload critical weight first -->
+  <link rel="preload" as="font" href="https://fonts.gstatic.com/s/inter/v13/UcCO3FwrK3iLTeHuS_fvQtMwCp50KnMw2boKoduKmMEVuLyfAZ9hiJ-Ek-_EeA.woff2" type="font/woff2" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
 
   <!-- CodeMirror 5 -->
@@ -190,7 +226,7 @@
   </header>
 
   <!-- Main -->
-  <main class="main" id="main">
+  <main class="main" id="main" aria-label="Code editor workspace">
 
     <!-- Editor Panel -->
     <div class="panel editor-panel" id="editor-panel">
@@ -315,13 +351,13 @@
         <p>⚡ <strong>HTMLCSSJSEditor</strong> — Free Online HTML CSS JS Editor &nbsp;•&nbsp; No sign-up &nbsp;•&nbsp; No backend &nbsp;•&nbsp; 100% Browser-based</p>
         <p class="seo-tags">
           Related searches:
-          <a href="https://htmleditor.analyticsdrive.tech/">html editor online</a> &bull;
-          <a href="https://htmleditor.analyticsdrive.tech/">css editor online</a> &bull;
-          <a href="https://htmleditor.analyticsdrive.tech/">javascript editor online</a> &bull;
-          <a href="https://htmleditor.analyticsdrive.tech/">html playground</a> &bull;
-          <a href="https://htmleditor.analyticsdrive.tech/">free online code editor</a> &bull;
-          <a href="https://htmleditor.analyticsdrive.tech/">codepen alternative</a> &bull;
-          <a href="https://htmleditor.analyticsdrive.tech/">live html preview</a>
+          <a href="https://htmleditor.analyticsdrive.tech/" rel="tag">html editor online</a> &bull;
+          <a href="https://htmleditor.analyticsdrive.tech/" rel="tag">css editor online</a> &bull;
+          <a href="https://htmleditor.analyticsdrive.tech/" rel="tag">javascript editor online</a> &bull;
+          <a href="https://htmleditor.analyticsdrive.tech/" rel="tag">html playground</a> &bull;
+          <a href="https://htmleditor.analyticsdrive.tech/" rel="tag">free online code editor</a> &bull;
+          <a href="https://htmleditor.analyticsdrive.tech/" rel="tag">codepen alternative</a> &bull;
+          <a href="https://htmleditor.analyticsdrive.tech/" rel="tag">live html preview</a>
         </p>
       </div>
 
