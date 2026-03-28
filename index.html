@@ -269,10 +269,10 @@
 
     <div class="topbar-right">
       <button class="btn btn-icon" onclick="toggleTheme()" title="Toggle Theme" id="btn-theme">🌙</button>
-      <button class="btn btn-secondary" onclick="shareCode()" title="Share Code">🔗 Share</button>
-      <button class="btn btn-secondary" onclick="openFile()" title="Open File">📂 Open</button>
-      <button class="btn btn-secondary" onclick="downloadCode()" title="Download">⬇️ Save</button>
-      <button class="btn btn-primary" onclick="runCode()" title="Run (Ctrl+Enter)">▶ Run</button>
+      <button class="btn btn-secondary" onclick="shareCode()" title="Share Code"><span>🔗</span><span>Share</span></button>
+      <button class="btn btn-secondary" onclick="openFile()" title="Open File"><span>📂</span><span>Open</span></button>
+      <button class="btn btn-secondary" onclick="downloadCode()" title="Download"><span>⬇️</span><span>Save</span></button>
+      <button class="btn btn-primary" id="run-btn-mobile" onclick="runCode()" title="Run (Ctrl+Enter)"><span>▶</span><span>Run</span></button>
     </div>
   </header>
 
@@ -319,6 +319,7 @@
     <!-- Preview Panel -->
     <div class="panel preview-panel" id="preview-panel">
       <div class="panel-header">
+        <button id="btn-back-to-editor" class="btn btn-ghost btn-sm mobile-back-btn" onclick="toggleMobileView(false)">← Code</button>
         <span class="panel-title">Preview</span>
         <div class="panel-actions">
           <div class="device-btns">

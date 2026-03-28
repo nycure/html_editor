@@ -343,15 +343,25 @@ body {
 ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
 
 /* ============================================================
-   RESPONSIVE
+   RESPONSIVE (Mobile Overhaul: Full-Screen Toggled View)
    ============================================================ */
+.mobile-back-btn { display: none; margin-right: 8px; }
+
 @media (max-width: 720px) {
-  .topbar-right .btn-secondary span:not(:first-child) { display: none; }
-  .main { flex-direction: column; }
-  .editor-panel { flex: none; height: 50%; border-right: none; border-bottom: 1px solid var(--border); }
-  .preview-panel { flex: none; height: 50%; }
-  .resizer { display: none; }
+  .topbar-right .btn span:not(:first-child) { display: none; }
   .tabs .tab { padding: 5px 10px; font-size: 11px; }
+  .resizer { display: none; }
+
+  .main { flex-direction: column; }
+  
+  /* Default Mobile State: Full Editor, No Preview */
+  .main:not(.show-preview-mobile) .editor-panel { flex: 1; height: 100%; border-right: none; }
+  .main:not(.show-preview-mobile) .preview-panel { display: none; }
+
+  /* Active Preview State: No Editor, Full Preview */
+  .main.show-preview-mobile .editor-panel { display: none; }
+  .main.show-preview-mobile .preview-panel { display: flex !important; height: 100%; flex: 1; }
+  .main.show-preview-mobile .mobile-back-btn { display: flex; }
 }
 
 /* ============================================================

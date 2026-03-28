@@ -109,7 +109,23 @@ ${h}
 
 function runCode() {
   updatePreview();
-  showToast('▶ Preview updated', 'info');
+  showToast('🚀 Running code...', 'success');
+
+  // Mobile UX: Automatically switch to full-screen preview when "Run" is clicked
+  if (window.innerWidth <= 720) {
+    toggleMobileView(true);
+  }
+}
+
+function toggleMobileView(showPreview) {
+  const main = document.getElementById('main');
+  if (showPreview) {
+    main.classList.add('show-preview-mobile');
+  } else {
+    main.classList.remove('show-preview-mobile');
+  }
+  // Refresh editors to fix any CodeMirror layout issues after view swap
+  Object.values(editors).forEach(ed => ed.refresh());
 }
 
 // ── Auto-Save ──────────────────────────────────────────────
