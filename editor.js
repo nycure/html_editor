@@ -1,6 +1,7 @@
 // ============================================================
-// CodeForge — editor.js
+// HTMLCSSJSEditor — editor.js
 // 100% Static — No backend, no server, just the browser
+// https://htmleditor.analyticsdrive.tech
 // ============================================================
 
 'use strict';
@@ -190,15 +191,18 @@ function handleFileOpen(event) {
     const src = e.target.result;
     const ext = file.name.split('.').pop().toLowerCase();
     if (ext === 'html' || ext === 'htm') {
-      const styleM  = src.match(/<style[^>]*>([\s\S]*?)<\/style>/i);
-      const scriptM = src.match(/<script[^>]*>([\s\S]*?)<\/script>/i);
-      let body = src
-        .replace(/<style[^>]*>[\s\S]*?<\/style>/gi,'')
-        .replace(/<script[^>]*>[\s\S]*?<\/script>/gi,'');
-      const bodyM = body.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
-      editors.html.setValue(bodyM ? bodyM[1].trim() : body.trim());
-      editors.css.setValue(styleM  ? styleM[1].trim()  : '');
-      editors.js.setValue(scriptM ? scriptM[1].trim() : '');
+      // Collect ALL style blocks and ALL inline script blocks
+      const styleMatches  = [...src.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)];
+      const scriptMatches = [...src.matchAll(/<script(?![^>]*\bsrc\b)[^>]*>([\s\S]*?)<\/script>/gi)];
+      const allCSS = styleMatches.map(m => m[1]).join('\n').trim();
+      const allJS  = scriptMatches.map(m => m[1]).join('\n').trim();
+      let cleaned = src
+        .replace(/<style[^>]*>[\s\S]*?<\/style>/gi, '')
+        .replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+      const bodyM = cleaned.match(/<body[^>]*>([\s\S]*?)<\/body>/i);
+      editors.html.setValue(bodyM ? bodyM[1].trim() : cleaned.trim());
+      editors.css.setValue(allCSS);
+      editors.js.setValue(allJS);
     } else if (ext === 'css') {
       editors.css.setValue(src); switchTab('css');
     } else if (ext === 'js') {
@@ -301,8 +305,19 @@ button{padding:13px 36px;background:linear-gradient(135deg,#00d4ff,#7c3aed);
   cursor:pointer;transition:.2s}
 button:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,212,255,.4)}`,
     js: `function greet(){
-  const msgs=['Hello! 👋','Start building! 🚀','You got this! 💪','CodeForge ⚡'];
-  alert(msgs[Math.floor(Math.random()*msgs.length)]);
+  const msgs=['Hello! 👋','Start building! 🚀','You got this! 💪','HTMLCSSJSEditor ⚡'];
+  const msg = msgs[Math.floor(Math.random()*msgs.length)];
+  let t = document.getElementById('_t');
+  if(!t){
+    t = document.createElement('div'); t.id='_t';
+    t.style.cssText='position:fixed;bottom:24px;left:50%;transform:translateX(-50%);'
+      +'background:linear-gradient(135deg,#00d4ff,#7c3aed);color:#fff;padding:12px 28px;'
+      +'border-radius:50px;font-weight:700;font-size:15px;z-index:9999;'
+      +'box-shadow:0 8px 24px rgba(0,212,255,.4);transition:opacity .4s';
+    document.body.appendChild(t);
+  }
+  t.textContent=msg; t.style.opacity='1';
+  clearTimeout(t._x); t._x=setTimeout(()=>t.style.opacity='0',2000);
 }`
   },
 
@@ -460,7 +475,14 @@ input::placeholder{color:rgba(255,255,255,.3)}
 .login-link a{color:#00d4ff;text-decoration:none}`,
     js: `function handleSubmit(e){
   e.preventDefault();
-  alert('🎉 Account created successfully!');
+  const btn = e.target.querySelector('.submit-btn');
+  btn.textContent = '✅ Account created!';
+  btn.style.background = 'linear-gradient(135deg,#10b981,#059669)';
+  setTimeout(()=>{
+    btn.textContent = 'Create Account →';
+    btn.style.background = '';
+    e.target.reset();
+  }, 2500);
 }`
   },
 
@@ -610,15 +632,15 @@ function setupResizer() {
   const main         = document.getElementById('main');
   let dragging = false, startX = 0, startY = 0, startEdW = 0, startEdH = 0;
 
-  resizer.addEventListener('mousedown', e => {
+  function startDrag(e) {
     dragging = true; resizer.classList.add('dragging');
     startX = e.clientX; startY = e.clientY;
     startEdW = editorPanel.offsetWidth; startEdH = editorPanel.offsetHeight;
     document.body.style.cursor = isStacked ? 'row-resize' : 'col-resize';
     document.body.style.userSelect = 'none';
-  });
+  }
 
-  document.addEventListener('mousemove', e => {
+  function onDrag(e) {
     if (!dragging) return;
     if (!isStacked) {
       const dx  = e.clientX - startX;
@@ -635,13 +657,24 @@ function setupResizer() {
       editorPanel.style.height = nh + 'px';
       previewPanel.style.flex  = '1';
     }
-    Object.values(editors).forEach(e => e.refresh());
-  });
+    Object.values(editors).forEach(ed => ed.refresh());
+  }
 
-  document.addEventListener('mouseup', () => {
+  function stopDrag() {
+    if (!dragging) return;
     dragging = false; resizer.classList.remove('dragging');
     document.body.style.cursor = ''; document.body.style.userSelect = '';
-  });
+  }
+
+  // Mouse events
+  resizer.addEventListener('mousedown', startDrag);
+  document.addEventListener('mousemove', onDrag);
+  document.addEventListener('mouseup', stopDrag);
+
+  // Touch events (mobile/tablet support)
+  resizer.addEventListener('touchstart', e => { e.preventDefault(); startDrag(e.touches[0]); }, { passive: false });
+  document.addEventListener('touchmove',  e => { if (dragging) { e.preventDefault(); onDrag(e.touches[0]); } }, { passive: false });
+  document.addEventListener('touchend',   stopDrag);
 }
 
 // ── Keyboard Shortcuts ─────────────────────────────────────
