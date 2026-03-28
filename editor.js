@@ -289,9 +289,9 @@ const TEMPLATES = {
     html: `<div class="container">
   <div class="card">
     <div class="icon">⚡</div>
-    <h1>Hello, World!</h1>
-    <p>Edit the <strong>HTML</strong>, <strong>CSS</strong> and <strong>JS</strong> panels to see your changes live.</p>
-    <button onclick="greet()">Click Me!</button>
+    <h1>HTMLCSSJSEditor: Online HTML Compiler</h1>
+    <p>Welcome to <strong>HTMLCSSJSEditor</strong>. Your free <strong>online HTML, CSS and JavaScript compiler</strong>. Start building your web projects instantly — no sign-up required!</p>
+    <button onclick="greet()">Learn More ⚡</button>
   </div>
 </div>`,
     css: `*{box-sizing:border-box;margin:0;padding:0}
@@ -329,14 +329,14 @@ button:hover{transform:translateY(-3px);box-shadow:0 10px 30px rgba(0,212,255,.4
   card: {
     html: `<div class="page">
   <div class="card">
-    <div class="card-img">🏔</div>
+    <div class="card-img">⚡</div>
     <div class="card-body">
-      <span class="badge">Adventure</span>
-      <h2>Alpine Escape</h2>
-      <p>Discover breathtaking peaks and crystal skies. Your next adventure awaits in the highlands.</p>
+      <span class="badge">Online HTML Compiler</span>
+      <h2>HTMLCSSJSEditor</h2>
+      <p>The best <strong>online HTML CSS JS compiler</strong> for developers. Build, test and showcase your web prototypes in seconds.</p>
       <div class="card-foot">
-        <span class="price">$299</span>
-        <button>Book Now →</button>
+        <span class="price">FREE</span>
+        <button>Start Coding →</button>
       </div>
     </div>
   </div>
@@ -361,19 +361,18 @@ button{padding:10px 22px;background:linear-gradient(135deg,#667eea,#764ba2);
 button:hover{transform:scale(1.05)}`,
     js: ''
   },
-
   navbar: {
     html: `<nav class="navbar">
-  <div class="nav-brand">🚀 BrandX</div>
+  <div class="nav-brand">🚀 HTMLCSSJSEditor</div>
   <div class="nav-links" id="navLinks">
     <a href="#">Home</a><a href="#">About</a><a href="#">Services</a><a href="#">Contact</a>
   </div>
   <button class="hamburger" onclick="toggleMenu()" id="hamburger">☰</button>
 </nav>
 <div class="hero">
-  <h1>Welcome to BrandX</h1>
-  <p>A fully responsive navigation bar — resize the preview to see it adapt.</p>
-  <button class="cta">Get Started →</button>
+  <h1>Welcome to HTMLCSSJSEditor</h1>
+  <p>A powerful <strong>online HTML editor</strong> and compiler. Build, test and share your web projects instantly. Resize the preview to see the responsive layout adapt.</p>
+  <button class="cta" onclick="toggleMenu()">Get Started →</button>
 </div>`,
     css: `*{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',sans-serif;background:#0f172a}
@@ -446,8 +445,8 @@ p{color:rgba(255,255,255,.5);margin-top:10px;font-size:15px;font-family:'Segoe U
     html: `<div class="page">
   <form class="form" onsubmit="handleSubmit(event)">
     <div class="form-header">
-      <h2>Create Account</h2>
-      <p>Join thousands of developers today</p>
+      <h2>HTMLCSSJSEditor</h2>
+      <p>The best <strong>online HTML editor</strong> for mobile and web development.</p>
     </div>
     <div class="field"><label>Full Name</label><input type="text" placeholder="John Doe" required /></div>
     <div class="field"><label>Email</label><input type="email" placeholder="john@example.com" required /></div>
@@ -493,7 +492,7 @@ input::placeholder{color:rgba(255,255,255,.3)}
 
   grid: {
     html: `<div class="page">
-  <header><h1>CSS Grid Layout</h1></header>
+  <header><h1>HTMLCSSJSEditor: Online CSS Grid Layout</h1></header>
   <div class="grid">
     <div class="card featured">🌟 Featured<br><small>Spans 2 columns</small></div>
     <div class="card">📦 Item 2</div>
