@@ -348,19 +348,23 @@ body {
 .mobile-back-btn { display: none; margin-right: 8px; }
 
 @media (max-width: 720px) {
+  .logo-text { display: none; }
+  .tabs .tab { padding: 4px 8px; font-size: 11px; }
   .topbar-right .btn span:not(:first-child) { display: none; }
-  .tabs .tab { padding: 5px 10px; font-size: 11px; }
+  .topbar-right { gap: 4px; }
+  #layout-btn { display: none; }
+  #templates-btn span:last-child { display: none; }
+  
   .resizer { display: none; }
-
   .main { flex-direction: column; }
   
   /* Default Mobile State: Full Editor, No Preview */
-  .main:not(.show-preview-mobile) .editor-panel { flex: 1; height: 100%; border-right: none; }
-  .main:not(.show-preview-mobile) .preview-panel { display: none; }
+  .main:not(.show-preview-mobile) #editor-panel { flex: 1; height: 100%; border-right: none; }
+  .main:not(.show-preview-mobile) #preview-panel { display: none !important; }
 
   /* Active Preview State: No Editor, Full Preview */
-  .main.show-preview-mobile .editor-panel { display: none; }
-  .main.show-preview-mobile .preview-panel { display: flex !important; height: 100%; flex: 1; }
+  .main.show-preview-mobile #editor-panel { display: none !important; }
+  .main.show-preview-mobile #preview-panel { display: flex !important; height: 100%; flex: 1; }
   .main.show-preview-mobile .mobile-back-btn { display: flex; }
 }
 
