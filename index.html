@@ -238,6 +238,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.65.16/addon/fold/foldgutter.min.css" />
 
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="mobile.css" media="(max-width: 720px)" />
 </head>
 <body>
 
@@ -269,9 +270,23 @@
 
     <div class="topbar-right">
       <button class="btn btn-icon" onclick="toggleTheme()" title="Toggle Theme" id="btn-theme">🌙</button>
-      <button class="btn btn-secondary" onclick="shareCode()" title="Share Code"><span>🔗</span><span>Share</span></button>
-      <button class="btn btn-secondary" onclick="openFile()" title="Open File"><span>📂</span><span>Open</span></button>
-      <button class="btn btn-secondary" onclick="downloadCode()" title="Download"><span>⬇️</span><span>Save</span></button>
+      
+      <!-- Primary Desktop Actions -->
+      <button class="btn btn-secondary desktop-only" onclick="shareCode()" title="Share Code"><span>🔗</span><span>Share</span></button>
+      <button class="btn btn-secondary desktop-only" onclick="openFile()" title="Open File"><span>📂</span><span>Open</span></button>
+      <button class="btn btn-secondary desktop-only" onclick="downloadCode()" title="Download"><span>⬇️</span><span>Save</span></button>
+      
+      <!-- Mobile Overflow Menu Trigger -->
+      <div class="more-dropdown mobile-only">
+        <button class="btn btn-icon" onclick="toggleMoreMenu()" title="More" id="more-btn">⋮</button>
+        <div class="dropdown-menu" id="more-menu">
+          <div class="dropdown-header">Actions</div>
+          <button onclick="shareCode()"><span>🔗</span> Share</button>
+          <button onclick="openFile()"><span>📂</span> Open</button>
+          <button onclick="downloadCode()"><span>⬇️</span> Save</button>
+        </div>
+      </div>
+
       <button class="btn btn-primary" id="run-btn-mobile" onclick="runCode()" title="Run (Ctrl+Enter)"><span>▶</span><span>Run</span></button>
     </div>
   </header>

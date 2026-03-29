@@ -25,12 +25,23 @@ document.addEventListener('DOMContentLoaded', () => {
   updatePreview();
   showToast('⚡ HTMLCSSJSEditor ready!', 'success');
 
-  // Close dropdowns on outside click
-  document.addEventListener('click', e => {
-    if (!e.target.closest('.templates-dropdown'))
-      document.getElementById('templates-menu').classList.remove('open');
-  });
 });
+
+function toggleMoreMenu() {
+  const menu = document.getElementById('more-menu');
+  const btn = document.getElementById('more-btn');
+  menu.classList.toggle('open');
+}
+
+// Close dropdowns on outside click
+window.onclick = function(event) {
+  if (!event.target.closest('.templates-dropdown')) {
+    document.getElementById('templates-menu').classList.remove('open');
+  }
+  if (!event.target.closest('.more-dropdown')) {
+    document.getElementById('more-menu').classList.remove('open');
+  }
+};
 
 // ── Editor Init ────────────────────────────────────────────
 function initEditors() {

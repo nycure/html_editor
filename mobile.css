@@ -1,0 +1,121 @@
+/* ============================================================
+   HTMLCSSJSEditor — mobile.css
+   Loaded ONLY on screens ≤ 720px.
+   ============================================================ */
+
+/* ── Utilities ─────────────────────────────────────────── */
+.desktop-only { display: none !important; }
+.mobile-only  { display: flex !important; }
+.mobile-back-btn { display: none; }
+
+/* ── Body Layout ────────────────────────────────────────── */
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+body {
+  height: 100dvh;             /* modern mobile dynamic viewport */
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+/* ── Top Bar ────────────────────────────────────────────── */
+.topbar {
+  flex: 0 0 48px !important;
+  height: 48px !important;
+  padding: 0 8px !important;
+  gap: 4px !important;
+}
+
+.logo-text { display: none !important; }
+.topbar-right .btn span:nth-child(2) { display: none !important; }
+
+.tabs .tab {
+  padding: 4px 6px !important;
+  font-size: 11px !important;
+}
+
+/* ── Main Workspace — MUST be flex container for children ─ */
+#main {
+  display: flex !important;
+  flex-direction: column !important;
+  flex: 1 1 0% !important;   /* take all remaining vertical space */
+  width: 100vw !important;
+  height: auto !important;
+  overflow: hidden !important;
+}
+
+/* ── Panels — Only one visible at a time ────────────────── */
+/* Editor first, Preview hidden by default */
+#main:not(.show-preview-mobile) #editor-panel {
+  display: flex !important;
+  flex: 1 1 100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+}
+
+#main:not(.show-preview-mobile) #preview-panel {
+  display: none !important;
+}
+
+/* Run mode: Preview first, Editor hidden */
+#main.show-preview-mobile #editor-panel {
+  display: none !important;
+}
+
+#main.show-preview-mobile #preview-panel {
+  display: flex !important;
+  flex: 1 1 100% !important;
+  width: 100% !important;
+  height: 100% !important;
+  border: none !important;
+}
+
+#main.show-preview-mobile .mobile-back-btn {
+  display: flex !important;
+}
+
+/* ── Statusbar / Footer ─────────────────────────────────── */
+.statusbar {
+  flex: 0 0 28px !important;
+  height: 28px !important;
+  white-space: nowrap !important;
+  overflow: hidden !important;
+  padding: 0 8px !important;
+  font-size: 10px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+/* ── More Dropdown ──────────────────────────────────────── */
+.more-dropdown .dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--bg-topbar);
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow);
+  z-index: 9999;
+}
+
+/* ── Sub-Breakpoints ───────────────────────────────────── */
+@media (max-width: 380px) {
+  .logo-icon { display: none !important; }
+}
+
+@media (max-width: 320px) {
+  #status-chars, #status-line, .sep { display: none !important; }
+}
+
+/* ── SEO Section — ABSOLUTELY HIDDEN on mobile ──────────── */
+.seo-section {
+  display: none !important;
+}
+
+.resizer {
+  display: none !important;
+}
