@@ -23,6 +23,16 @@ document.addEventListener('DOMContentLoaded', () => {
   setupResizer();
   setupKeyboardShortcuts();
   updatePreview();
+  initAboutToggle();
+  window.addEventListener('resize', () => {
+    Object.values(editors).forEach(ed => ed.refresh());
+    // If we've manually resized panels, reset them on large window resize
+    if (window.innerWidth > 720 && isStacked === false) {
+       document.getElementById('editor-panel').style.flex = '';
+       document.getElementById('editor-panel').style.width = '';
+       document.getElementById('preview-panel').style.flex = '';
+    }
+  });
   showToast('⚡ HTMLCSSJSEditor ready!', 'success');
 
 });
@@ -283,6 +293,56 @@ function loadFromURL() {
   } catch(e) {
     showToast('❌ Invalid share link', 'error');
     return false;
+  }
+}
+
+// ── About Toggle ──────────────────────────────────────────
+function initAboutToggle() {
+  window.addEventListener('hashchange', checkHash);
+  checkHash();
+}
+
+function checkHash() {
+  const hash = location.hash;
+  if (hash === '#about') {
+    showAbout(true);
+  } else {
+    // Hide about if hash is empty, #, or a code share
+    showAbout(false);
+  }
+}
+
+function showAbout(visible) {
+  const seo = document.getElementById('about');
+  const main = document.getElementById('main');
+  const footer = document.querySelector('.statusbar');
+
+  if (visible) {
+    seo.classList.add('show');
+    // REMOVED: main.classList.add('hidden'); 
+
+    if (window.innerWidth <= 720) {
+      if (footer) footer.classList.add('hidden');
+    }
+    
+    document.body.style.overflow = 'auto'; // Allow scrolling down to the About page
+    
+    // Smoothly scroll down to the About section instead of jumping to the top
+    setTimeout(() => seo.scrollIntoView({ behavior: 'smooth' }), 50);
+
+  } else {
+    seo.classList.remove('show');
+    // REMOVED: main.classList.remove('hidden');
+
+    if (footer) footer.classList.remove('hidden');
+    document.body.style.overflow = 'hidden'; // Restore app behavior
+    
+    // Scroll back up to the editor
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+    if (window.innerWidth <= 720) {
+       Object.values(editors).forEach(ed => ed.refresh());
+    }
   }
 }
 
