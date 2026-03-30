@@ -19,22 +19,42 @@ let editors     = {};
 document.addEventListener('DOMContentLoaded', () => {
   initTheme();
   initEditors();
-  loadFromStorage();   // also checks URL share
+  loadFromStorage();
   setupResizer();
   setupKeyboardShortcuts();
   updatePreview();
   initAboutToggle();
-  window.addEventListener('resize', () => {
-    Object.values(editors).forEach(ed => ed.refresh());
-    // If we've manually resized panels, reset them on large window resize
-    if (window.innerWidth > 720 && isStacked === false) {
-       document.getElementById('editor-panel').style.flex = '';
-       document.getElementById('editor-panel').style.width = '';
-       document.getElementById('preview-panel').style.flex = '';
+
+  // 1. JS Error Message Listener
+  window.addEventListener('message', function(e) {
+    if (e.data && e.data.type === 'js-error') {
+      showToast('⚠ JS Error: ' + e.data.msg, 'error');
     }
   });
-  showToast('⚡ HTMLCSSJSEditor ready!', 'success');
 
+  // 3. Debounced Window Resize
+  let resizeTimeout;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      Object.values(editors).forEach(ed => ed.refresh());
+      if (window.innerWidth > 720 && isStacked === false) {
+         document.getElementById('editor-panel').style.flex = '';
+         document.getElementById('editor-panel').style.width = '';
+         document.getElementById('preview-panel').style.flex = '';
+      }
+    }, 150);
+  });
+
+  showToast('⚡ HTMLCSSJSEditor ready!', 'success');
+});
+
+// 4. Prevent Accidental Data Loss (Tab Closure)
+window.addEventListener('beforeunload', function (e) {
+  if (saveTimer) {
+    e.preventDefault();
+    e.returnValue = 'You have unsaved changes. Are you sure you want to leave?';
+  }
 });
 
 function toggleMoreMenu() {
@@ -114,7 +134,15 @@ function updatePreview() {
 
   const doc = `<!DOCTYPE html><html lang="en"><head>
 <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0">
-<style>${c}</style></head><body>
+<style>${c}</style>
+<script>
+  // Catch errors and send them to the parent window
+  window.onerror = function(msg, source, lineno, colno, error) {
+    window.parent.postMessage({type: 'js-error', msg: msg, line: lineno}, '*');
+    return true; 
+  };
+<\/script>
+</head><body>
 ${h}
 <script>${j}<\/script></body></html>`;
 
@@ -762,10 +790,20 @@ function setupResizer() {
   document.addEventListener('mousemove', onDrag);
   document.addEventListener('mouseup', stopDrag);
 
-  // Touch events (mobile/tablet support)
+  //  Touch events (mobile/tablet support)
   resizer.addEventListener('touchstart', e => { e.preventDefault(); startDrag(e.touches[0]); }, { passive: false });
   document.addEventListener('touchmove',  e => { if (dragging) { e.preventDefault(); onDrag(e.touches[0]); } }, { passive: false });
   document.addEventListener('touchend',   stopDrag);
+
+  // 2. Double-Click to Reset the Resizer back to 50/50
+  resizer.addEventListener('dblclick', () => {
+    editorPanel.style.flex = '';
+    editorPanel.style.width = '';
+    editorPanel.style.height = '';
+    previewPanel.style.flex = '';
+    Object.values(editors).forEach(ed => ed.refresh());
+    showToast('Layout reset', 'info');
+  });
 }
 
 // ── Keyboard Shortcuts ─────────────────────────────────────
