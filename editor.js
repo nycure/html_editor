@@ -64,7 +64,7 @@ function initEditors() {
     gutters:          ['CodeMirror-linenumbers','CodeMirror-foldgutter'],
     indentUnit:       2,
     tabSize:          2,
-    lineWrapping:     false,
+    lineWrapping:     window.innerWidth <= 720, // Enable line wrapping on mobile
     extraKeys: {
       'Ctrl-Enter': runCode,
       'Ctrl-S':     downloadCode,

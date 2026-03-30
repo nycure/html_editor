@@ -83,11 +83,25 @@ body {
   flex: 0 0 28px !important;
   height: 28px !important;
   white-space: nowrap !important;
-  overflow: hidden !important;
+  overflow-x: auto !important;
+  overflow-y: hidden !important;
+  -webkit-overflow-scrolling: touch;
   padding: 0 8px !important;
   font-size: 10px !important;
   display: flex !important;
   align-items: center !important;
+  max-width: 100vw !important;
+}
+
+/* Hide the invisible scrollbar for a cleaner look */
+.statusbar::-webkit-scrollbar {
+  display: none;
+}
+
+/* Hide the Font-Size controls on mobile to free up space */
+.statusbar > span:nth-child(5),
+.statusbar > span:nth-child(6) {
+  display: none !important;
 }
 
 /* ── More Dropdown ──────────────────────────────────────── */
