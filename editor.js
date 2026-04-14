@@ -360,9 +360,9 @@ function showAbout(visible) {
       if (footer) footer.classList.add('hidden');
     }
     
-    // Unlock for scrolling
-    document.documentElement.style.overflow = 'auto';
-    document.body.style.overflow = 'auto';
+    // Unlock for scrolling (Phase 8: Release height constraint)
+    document.documentElement.classList.add('seo-active');
+    document.body.classList.add('seo-active');
     
     setTimeout(() => seo.scrollIntoView({ behavior: 'smooth' }), 50);
 
@@ -377,7 +377,11 @@ function showAbout(visible) {
     
     if (footer) footer.classList.remove('hidden');
 
-    // 2. Force scroll to top instantly across ALL possible scrollers
+    // 3. Reset height and re-lock overflow (Phase 8)
+    document.documentElement.classList.remove('seo-active');
+    document.body.classList.remove('seo-active');
+    
+    // Force scroll to top instantly across ALL possible scrollers
     window.scrollTo(0, 0);
     document.body.scrollTop = 0;
     document.documentElement.scrollTop = 0;

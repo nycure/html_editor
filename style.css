@@ -66,6 +66,15 @@ body {
   overflow: hidden;
 }
 
+/* Releasers for SEO scroll */
+html.seo-active, 
+body.seo-active {
+  height: auto !important;
+  min-height: 100vh;
+  overflow-y: auto !important;
+  overflow-x: hidden;
+}
+
 
 /* ---- Utilities ---- */
 .desktop-only { display: flex !important; }
@@ -392,6 +401,8 @@ body {
   padding: 80px 24px 60px;
   pointer-events: auto;
 }
+
+.seo-active { overflow: auto; }
 
 .seo-inner { max-width: 960px; margin: 0 auto; }
 
