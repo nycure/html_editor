@@ -71,6 +71,17 @@ body {
 .desktop-only { display: flex !important; }
 .mobile-only  { display: none !important; }
 .hidden { display: none !important; }
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
 
 
 /* ============================================================
@@ -361,16 +372,14 @@ body {
    SEO CONTENT SECTION
    ============================================================ */
 .seo-section {
-  display: none !important; /* Hidden by default to prevent layout crushing */
+  display: block; /* Visible for indexing, but sits below the editor viewport */
   background: var(--bg-topbar);
   border-top: 3px solid var(--accent);
   padding: 80px 24px 60px;
   font-family: 'Inter', sans-serif;
   width: 100%;
 }
-.seo-section.show {
-  display: block !important;
-}
+/* Removed .seo-section.show to maintain permanent DOM visibility */
 
 .seo-inner { max-width: 960px; margin: 0 auto; }
 

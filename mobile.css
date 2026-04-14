@@ -124,9 +124,9 @@ body {
   #status-chars, #status-line, .sep { display: none !important; }
 }
 
-/* ── SEO Section — ABSOLUTELY HIDDEN on mobile ──────────── */
+/* ── SEO Section — Visible for indexing ──────────── */
 .seo-section {
-  display: none;
+  /* Inherits display: block from style.css */
 }
 
 .resizer {
