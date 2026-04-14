@@ -346,6 +346,7 @@ function showAbout(visible) {
 
   if (visible) {
     seo.classList.add('show');
+    seo.setAttribute('aria-hidden', 'false');
     
     if (window.innerWidth <= 720) {
       if (footer) footer.classList.add('hidden');
@@ -360,6 +361,7 @@ function showAbout(visible) {
   } else {
     // 1. Instantly hide the section to reclaim space
     seo.classList.remove('show');
+    seo.setAttribute('aria-hidden', 'true');
     
     if (footer) footer.classList.remove('hidden');
 

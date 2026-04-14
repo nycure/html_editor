@@ -374,15 +374,23 @@ body {
    SEO CONTENT SECTION
    ============================================================ */
 .seo-section {
-  display: none; /* Hidden by default to maintain app UI focus */
+  display: block !important; /* Always visible in DOM for bot indexing */
+  height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
   background: var(--bg-topbar);
   border-top: 3px solid var(--accent);
-  padding: 80px 24px 60px;
+  padding: 0 24px; /* Default no padding when hidden */
   font-family: 'Inter', sans-serif;
   width: 100%;
+  transition: opacity 0.3s ease;
 }
 .seo-section.show {
-  display: block !important;
+  height: auto;
+  opacity: 1;
+  padding: 80px 24px 60px;
+  pointer-events: auto;
 }
 
 .seo-inner { max-width: 960px; margin: 0 auto; }
