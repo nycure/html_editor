@@ -351,21 +351,24 @@ function showAbout(visible) {
       if (footer) footer.classList.add('hidden');
     }
     
-    // Unlock BOTH html and body for smooth scrolling down
+    // Unlock for scrolling
     document.documentElement.style.overflow = 'auto';
     document.body.style.overflow = 'auto';
     
     setTimeout(() => seo.scrollIntoView({ behavior: 'smooth' }), 50);
 
   } else {
+    // 1. Instantly hide the section to reclaim space
     seo.classList.remove('show');
     
     if (footer) footer.classList.remove('hidden');
 
-    // INSTANT scroll to top BEFORE locking overflow to prevent being "trapped" at the bottom
-    window.scrollTo({ top: 0, behavior: 'auto' });
+    // 2. Force scroll to top instantly across ALL possible scrollers
+    window.scrollTo(0, 0);
+    document.body.scrollTop = 0;
+    document.documentElement.scrollTop = 0;
     
-    // Re-lock BOTH html and body to restore app state
+    // 3. Re-lock overflow to restore app state
     document.documentElement.style.overflow = 'hidden';
     document.body.style.overflow = 'hidden';
 
