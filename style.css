@@ -489,3 +489,20 @@ body {
   transition: color 0.15s;
 }
 .seo-tags a:hover { color: var(--accent); }
+
+.seo-legal {
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+.seo-legal a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+.seo-legal a:hover {
+  color: var(--accent);
+}
