@@ -141,6 +141,14 @@ function updatePreview() {
     window.parent.postMessage({type: 'js-error', msg: msg, line: lineno}, '*');
     return true; 
   };
+
+  // 2. Navigation Guard: Prevent '#' or empty links from reloading the parent editor
+  document.addEventListener('click', function(e) {
+    const target = e.target.closest('a');
+    if (target && (target.getAttribute('href') === '#' || target.getAttribute('href') === '')) {
+      e.preventDefault();
+    }
+  });
 <\/script>
 </head><body>
 ${h}
@@ -490,7 +498,7 @@ button:hover{transform:scale(1.05)}`,
     html: `<nav class="navbar">
   <div class="nav-brand">🚀 HTMLCSSJSEditor</div>
   <div class="nav-links" id="navLinks">
-    <a href="#">Home</a><a href="#">About</a><a href="#">Services</a><a href="#">Contact</a>
+    <a href="javascript:void(0)">Home</a><a href="javascript:void(0)">About</a><a href="javascript:void(0)">Services</a><a href="javascript:void(0)">Contact</a>
   </div>
   <button class="hamburger" onclick="toggleMenu()" id="hamburger">☰</button>
 </nav>
@@ -576,8 +584,8 @@ p{color:rgba(255,255,255,.5);margin-top:10px;font-size:15px;font-family:'Segoe U
     <div class="field"><label>Full Name</label><input type="text" placeholder="John Doe" required /></div>
     <div class="field"><label>Email</label><input type="email" placeholder="john@example.com" required /></div>
     <div class="field"><label>Password</label><input type="password" placeholder="Min 8 characters" required /></div>
-    <button type="submit" class="submit-btn">Create Account →</button>
-    <p class="login-link">Already have an account? <a href="#">Sign in</a></p>
+    <button type="submit" class="submit-btn" onclick="alert('Account created (Demo)')">Create Account →</button>
+    <p class="login-link">Already have an account? <a href="javascript:void(0)">Sign in</a></p>
   </form>
 </div>`,
     css: `*{box-sizing:border-box;margin:0;padding:0}
