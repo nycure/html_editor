@@ -359,7 +359,11 @@ function showAbout(visible) {
     setTimeout(() => seo.scrollIntoView({ behavior: 'smooth' }), 50);
 
   } else {
-    // 1. Instantly hide the section to reclaim space
+    // 1. Move focus back to the main app BEFORE hiding (Fixes ARIA console error)
+    const htmlTab = document.getElementById('tab-html');
+    if (htmlTab) htmlTab.focus();
+
+    // 2. Instantly hide the section to reclaim space
     seo.classList.remove('show');
     seo.setAttribute('aria-hidden', 'true');
     
