@@ -342,31 +342,32 @@ function checkHash() {
 
 function showAbout(visible) {
   const seo = document.getElementById('about');
-  const main = document.getElementById('main');
   const footer = document.querySelector('.statusbar');
 
   if (visible) {
     seo.classList.add('show');
-    // REMOVED: main.classList.add('hidden'); 
-
+    
     if (window.innerWidth <= 720) {
       if (footer) footer.classList.add('hidden');
     }
     
-    document.body.style.overflow = 'auto'; // Allow scrolling down to the About page
+    // Unlock BOTH html and body for smooth scrolling down
+    document.documentElement.style.overflow = 'auto';
+    document.body.style.overflow = 'auto';
     
-    // Smoothly scroll down to the About section instead of jumping to the top
     setTimeout(() => seo.scrollIntoView({ behavior: 'smooth' }), 50);
 
   } else {
     seo.classList.remove('show');
-    // REMOVED: main.classList.remove('hidden');
-
-    if (footer) footer.classList.remove('hidden');
-    document.body.style.overflow = 'hidden'; // Restore app behavior
     
-    // Scroll back up to the editor
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (footer) footer.classList.remove('hidden');
+
+    // INSTANT scroll to top BEFORE locking overflow to prevent being "trapped" at the bottom
+    window.scrollTo({ top: 0, behavior: 'auto' });
+    
+    // Re-lock BOTH html and body to restore app state
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overflow = 'hidden';
 
     if (window.innerWidth <= 720) {
        Object.values(editors).forEach(ed => ed.refresh());
