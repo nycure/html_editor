@@ -152,6 +152,7 @@ body.seo-active {
   cursor: pointer; display: flex; align-items: center; gap: 5px;
   transition: all 0.2s; font-family: 'Inter', sans-serif;
   white-space: nowrap;
+  text-decoration: none;
 }
 .btn:hover { background: var(--bg-btn-hover); border-color: var(--accent); transform: translateY(-1px); }
 .btn:active { transform: translateY(0); }
