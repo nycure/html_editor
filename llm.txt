@@ -1,0 +1,30 @@
+# HTMLCSSJSEditor
+
+HTMLCSSJSEditor is a high-performance, 100% static online HTML compiler and live preview editor. It allows developers to write and test HTML, CSS, and JavaScript code directly in the browser with no backend dependencies.
+
+## Key Features
+- **Instant Live Preview**: Renders code in real-time as you type using a sandboxed iframe.
+- **Syntax Highlighting**: Powered by CodeMirror 5 with support for auto-closing tags and brackets.
+- **Auto-Save**: Persists code locally in the browser's `localStorage`.
+- **Responsive Preview**: Includes toggles for Desktop, Tablet, and Mobile view simulations.
+- **Shareable Projects**: Encodes project state into a Base64 URL string for sharing.
+- **Lightweight & Fast**: Built with pure HTML, CSS, and Vanilla JavaScript.
+
+## Project Structure
+- `index.html`: Main application entry point containing the editor layout and SEO content.
+- `editor.js`: Core logic for editor initialization, preview rendering, and state management.
+- `style.css`: Global design system and layout styling.
+- `mobile.css`: Responsive overrides for mobile devices.
+- `contact.html`: Contact form with a simulated professional success state.
+- `privacy-policy.html`, `terms-and-conditions.html`, `disclaimer.html`: Standard static legal pages.
+
+## Tech Stack
+- **Frontend**: HTML5, Vanilla CSS3, JavaScript (ES6+).
+- **Editor Engine**: CodeMirror 5.
+- **Deployment**: Static hosting (GitHub Pages).
+
+## Development Guidelines
+- Always maintain clean, semantic HTML.
+- Favor CSS custom properties (variables) for theme consistency.
+- Ensure all new features are fully mobile-responsive.
+- Avoid external libraries unless strictly necessary for core functionality.
