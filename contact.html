@@ -1,53 +1,149 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width,initial-scale=1.0">
   <title>Contact Us | HTMLCSSJSEditor</title>
   <style>
-    :root { --bg: #0d1117; --text: #c9d1d9; --accent: #58a6ff; --border: #30363d; --card: #161b22; }
-    body { background: var(--bg); color: var(--text); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif; line-height: 1.6; max-width: 800px; margin: 0 auto; padding: 40px 20px; }
-    h1, h2 { color: #fff; border-bottom: 1px solid var(--border); padding-bottom: 10px; margin-top: 30px; }
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-    .back-btn { display: inline-block; margin-bottom: 20px; font-weight: 600; }
-    
-    .contact-card { background: var(--card); border: 1px solid var(--border); border-radius: 12px; padding: 40px; margin-top: 40px; text-align: center; }
-    .form-group { text-align: left; margin-bottom: 20px; }
-    label { display: block; margin-bottom: 8px; font-weight: 500; font-size: 14px; }
-    input, textarea { width: 100%; padding: 12px; background: #0d1117; border: 1px solid var(--border); border-radius: 6px; color: #fff; box-sizing: border-box; }
-    button { background: var(--accent); color: #fff; border: none; padding: 12px 24px; border-radius: 6px; font-weight: 600; cursor: pointer; width: 100%; margin-top: 10px; }
-    button:hover { brightness: 1.1; }
+    :root {
+      --bg: #0d1117;
+      --text: #c9d1d9;
+      --accent: #58a6ff;
+      --border: #30363d;
+      --card: #161b22;
+    }
 
-    footer { margin-top: 100px; font-size: 0.9em; color: #8b949e; border-top: 1px solid var(--border); padding-top: 20px; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 40px 20px;
+    }
+
+    h1,
+    h2 {
+      color: #fff;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 10px;
+      margin-top: 30px;
+    }
+
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .back-btn {
+      display: inline-block;
+      margin-bottom: 20px;
+      font-weight: 600;
+    }
+
+    .contact-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 40px;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .form-group {
+      text-align: left;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    input,
+    textarea {
+      width: 100%;
+      padding: 12px;
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: #fff;
+      box-sizing: border-box;
+    }
+
+    button {
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 10px;
+    }
+
+    button:hover {
+      brightness: 1.1;
+    }
+
+    footer {
+      margin-top: 100px;
+      font-size: 0.9em;
+      color: #8b949e;
+      border-top: 1px solid var(--border);
+      padding-top: 20px;
+    }
   </style>
 </head>
+
 <body>
 
   <a href="/" class="back-btn">← Back to Editor</a>
 
   <h1>Contact Us</h1>
-  <p>Got a question, feedback, or found a bug? We'd love to hear from you. Since <strong>HTMLCSSJSEditor</strong> is a lean, community-focused tool, we aim to respond to all inquiries within 48 hours.</p>
+  <p>Got a question, feedback, or found a bug? We'd love to hear from you. Since <strong>HTMLCSSJSEditor</strong> is a
+    lean, community-focused tool, we aim to respond to all inquiries within 48 hours.</p>
 
   <div class="contact-card">
-    <form onsubmit="alert('Thank you! This is a demo form. Please email us directly for real inquiries.'); return false;">
-      <div class="form-group">
-        <label>Your Name</label>
-        <input type="text" placeholder="Jane Doe" required />
+    <form id="contact-form" onsubmit="handleContactSubmit(event)">
+      <div id="form-content">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" placeholder="Jane Doe" required />
+        </div>
+        <div class="form-group">
+          <label>Your Email</label>
+          <input type="email" placeholder="jane@example.com" required />
+        </div>
+        <div class="form-group">
+          <label>Message</label>
+          <textarea rows="5" placeholder="How can we help you?" required></textarea>
+        </div>
+        <button type="submit">Send Message 🚀</button>
       </div>
-      <div class="form-group">
-        <label>Your Email</label>
-        <input type="email" placeholder="jane@example.com" required />
+
+      <!-- Success Message (Initially Hidden) -->
+      <div id="success-message" style="display: none;">
+        <div style="font-size: 48px; margin-bottom: 20px;">✅</div>
+        <h2 style="color: #3fb950; border: none; margin-top: 0;">Message Sent!</h2>
+        <p>Thank you for your feedback! Your message has been sent. We appreciate you helping us improve
+          <strong>HTMLCSSJSEditor</strong>.</p>
+        <button type="button" onclick="location.reload()"
+          style="background: var(--border); margin-top: 20px; width: auto;">Send Another Message</button>
       </div>
-      <div class="form-group">
-        <label>Message</label>
-        <textarea rows="5" placeholder="How can we help you?" required></textarea>
-      </div>
-      <button type="submit">Send Message 🚀</button>
     </form>
 
-    <div style="margin-top: 30px; font-size: 14px; opacity: 0.8;">
-      Or reach out directly at: <br/>
+    <div id="direct-contact" style="margin-top: 30px; font-size: 14px; opacity: 0.8;">
+      Or reach out directly at: <br />
       <a href="mailto:support@analyticsdrive.tech">support@analyticsdrive.tech</a>
     </div>
   </div>
@@ -56,5 +152,19 @@
     &copy; 2026 HTMLCSSJSEditor &bull; Free Online HTML Compiler
   </footer>
 
+  <script>
+    function handleContactSubmit(e) {
+      e.preventDefault();
+
+      // Hide form content and direct contact info
+      document.getElementById('form-content').style.display = 'none';
+      document.getElementById('direct-contact').style.display = 'none';
+
+      // Show success message
+      document.getElementById('success-message').style.display = 'block';
+    }
+  </script>
+
 </body>
+
 </html>
